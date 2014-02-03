@@ -18,6 +18,7 @@ var _ = require("underscore"),
     Schema = mongoose.Schema;
 
 var statisticSchema = new Schema({
+        type : String,
         username : String,
         name : String,
         value : Number,

@@ -17,6 +17,7 @@ var errors = require('../libs/error/abstracterror'),
     mongoose = require('mongoose'),
     User = require('../libs/database/mongo/model/model_user'),
     Statistic = require('../libs/database/mongo/model/model_statistic'),
+    type = "data#statistic",
 
 //Include npm modules
     _ = require("underscore"),
@@ -47,13 +48,62 @@ module.exports = function (app) {
     });
 
     //  leaderboard/user/name/stats/ -> GET
+    /**
+     * getStats accepts username as the input. After username is validated a list
+     *          of all the stats stored agains the username are retrieved.
+     */
     app.get('/leaderboard/user/:uname/stats', function (req, res) {
-        var username = req.param('uname');
+        var username = req.param('uname'),
+            fields = null,
+            options = null,
+            query = null;
 
-        res.send(200, {message : "Stats for: " + username});
+        function handleFindStatisticsResponse (err, data) {
+            if (err) {
+                //Error - print & return
+                console.error(err);
+                res.send(500, err);
+            } else {
+                //If data length > 0,
+                if (data.length > 0) {
+                    //Return 200 with the created statistic
+                    res.send(200, data);
+                } else {
+                    //No data returned, the specified username does not exist
+                    res.send(404, {message : "The specified username does not exist! Please try a different username!"});
+                }
+
+            }
+        }//END handleFindStatisticsResponse
+
+        //Check to make sure the username is specified
+        if (!_.isUndefined(username) && !_.isNull(username)) {
+            query = {
+                type : type,
+                username : username
+            };
+
+            options = {
+                sort : {
+                    //name : -1 //Sort by Name DESC
+                    name : 1 //Sort by Name ASC
+                }
+            };
+            //Find all the statistics for the specified username
+            Statistic.find(query, fields, options, handleFindStatisticsResponse);
+
+        } else {
+            //Missing Username - bad request
+            res.send(400, { message : 'Missing Username!'});
+        }
+
     });
 
     //  leaderboard/user/name/stat/name -> PUT
+    /**
+     * sendStat accepts username, statistic name and statistic value. Each input is validated and
+     *          stored against the specified username.
+     */
     app.put('/leaderboard/user/:uname/stat/:sname', function (req, res) {
         var username = req.param('uname'),
             statname = req.param('sname'),
@@ -66,6 +116,7 @@ module.exports = function (app) {
 
         function handleCreateStatisticResponse (err, data) {
             if (err) {
+                //Error - print & return
                 console.error(err);
                 res.send(500, err);
             } else {
@@ -76,6 +127,7 @@ module.exports = function (app) {
 
         function handleStatisticUpdateResponse (err, data) {
             if (err) {
+                //Error - print & return
                 console.error(err);
                 res.send(500, err);
             } else {
@@ -85,6 +137,7 @@ module.exports = function (app) {
                 } else {
                     //If the statistic doesnt exist, create the new statistic
                     create = {
+                        type : type,
                         username : username,
                         name : statname,
                         value : statvalue,
@@ -107,7 +160,11 @@ module.exports = function (app) {
                 };
 
                 //The query to find a result for the specified username & stat name
-                query = { username : username, name : statname };
+                query = {
+                    type : type,
+                    username : username,
+                    name : statname
+                };
 
 
 

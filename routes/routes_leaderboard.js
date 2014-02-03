@@ -34,7 +34,7 @@ module.exports = function (app) {
      *  Routes currently do not require authentication!          *
      *************************************************************/
 
-        // Retrieve Company Profile
+    // Test method for routing
     app.get('/leaderboard/', function (req, res) {
             res.send(200, { message : 'Tada!'});
     });
@@ -186,5 +186,70 @@ module.exports = function (app) {
     }); //END
 
     //  leaderboard/stat/name -> GET
+    app.get('/leaderboard/stat/:sname', function (req, res) {
+        var statname = req.param('sname'),
+            fields = null,
+            options = null,
+            query = null,
+            leaderboard = [];
+
+        function handleFindStatisticsResponse (err, data) {
+            function forEachDocument (element, index, list) {
+                var userstat = element.toObject();
+                //Add the user's ranking
+                userstat.ranking = index + 1;
+                leaderboard.push(userstat);
+
+                console.log("Adding ranking #" + userstat.ranking);
+
+            } //forEachDocument
+
+            if (err) {
+                //Error - print & return
+                console.error(err);
+                res.send(500, err);
+            } else {
+                //If data length > 0,
+                if (data.length > 0) {
+                    console.log("Adding ranking");
+
+                    //TODO Leverage DBMS or Mongoose if possible
+                    //Add ranking -> Can DBMS or Mongoose insert #?
+                    _.each(data, forEachDocument);
+
+                    //Return 200 with the created statistic
+                    res.send(200, leaderboard);
+                } else {
+                    //No data returned, the specified username does not exist
+                    res.send(404, {message : "The specified statistic does not exist! Please try a different stat!"});
+                }
+
+            }
+        }//END handleFindStatisticsResponse
+
+        //Check to make sure the statistic is specified
+        if (!_.isUndefined(statname) && !_.isNull(statname)) {
+            query = {
+                type : type,
+                name : statname
+            };
+
+            options = {
+                sort : {
+                    value: -1 //Sort by Value DESC
+                    //value : 1 //Sort by Value ASC
+                }
+            };
+
+            console.log("Finding statistics for " + statname);
+            //Find all the statistics for the specified username
+            Statistic.find(query, fields, options, handleFindStatisticsResponse);
+
+        } else {
+            //Missing Username - bad request
+            res.send(400, { message : 'Missing statistic!'});
+        }
+
+    }); //END GET
 
 };

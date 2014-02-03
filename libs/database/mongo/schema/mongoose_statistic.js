@@ -18,11 +18,11 @@ var _ = require("underscore"),
     Schema = mongoose.Schema;
 
 var statisticSchema = new Schema({
-        type : String,
+        username : String,
         name : String,
-        value : String,
-        created : String,
-        lastmodified : String
+        value : Number,
+        created : Date,
+        lastmodified : Date
     },
     {
         collection : 'ldrly'

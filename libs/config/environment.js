@@ -17,8 +17,8 @@ var newrelic = require('newrelic'),
 //Required in-order to render HTML Templates
     Mustache = require('mustache'),
 //Required Templates
-    TemplateData = require('../template/templatedata'),
-    template = require('../../views/template');
+    TemplateData = require('../template/templatedata');
+    //template = require('../../views/template');
 
 module.exports = function (app, express) {
     //Template data for the 400 and 500 pages
@@ -51,11 +51,12 @@ module.exports = function (app, express) {
         //Set the 404 Status
         res.status(404);
         //Setup the Data for the Mustache Template
-        var data = templatedata.data.error,
-            html;
-        data.global = templatedata.data.global;
-        html = Mustache.render(template.global.error.s404.page, data);
-        res.send(html);
+        //TODO Uncomment when templatedata fixed
+//        var data = templatedata.data.error,
+//            html;
+//        data.global = templatedata.data.global;
+//        html = Mustache.render(template.global.error.s404.page, data);
+//        res.send(html);
 //        res.send('404: Page not Found', 404);
     }
 
@@ -70,12 +71,13 @@ module.exports = function (app, express) {
         //Set the 500 Status
         res.status(500);
         //Setup the Data for the Mustache Template
-        var data = templatedata.data.error,
-            html;
-        data.global = templatedata.data.global;
-        data.err = err;
-        html = Mustache.render(template.global.error.s500.page, data);
-        res.send(html);
+        //TODO Uncomment when templatedata fixed
+//        var data = templatedata.data.error,
+//            html;
+//        data.global = templatedata.data.global;
+//        data.err = err;
+//        html = Mustache.render(template.global.error.s500.page, data);
+//        res.send(html);
     }
 
     /*  =====================================

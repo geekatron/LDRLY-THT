@@ -16,6 +16,7 @@ var express = require('express'),
     env = require('./libs/config/endpoint'),
     http = require('http'),
     path = require('path'),
+    mongoose = require('mongoose'),
     app = express();
 
 /*
@@ -26,6 +27,9 @@ var express = require('express'),
 
 var app = module.exports = express(),
     processport = process.env.PORT || 5050;
+
+//Global variable for the Mongo connection pool
+global.db = mongoose.createConnection(process.env.MONGOHQ_URL);
 
 global.debug = (process.env.DEBUG_MODE === 'true') || false;
 
@@ -38,7 +42,7 @@ require('./routes/routes_cors')(app);
 //Route for HTML content
 //require('./routes/routes_html')(app);
 //Route for the service
-//require('./routes/routes_leaderboard')(app);
+require('./routes/routes_leaderboard')(app);
 
 // start server
 app.listen(processport);

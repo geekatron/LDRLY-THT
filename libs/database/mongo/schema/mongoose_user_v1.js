@@ -21,6 +21,7 @@ var userSchema = new Schema({
         profile : String,
         email : String,
         username : String,
+        stats : [{ type : Schema.Types.ObjectId, ref: 'Statistic'}],
         created : String,
         lastmodified : String
     },

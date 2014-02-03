@@ -71,7 +71,7 @@ Sample JSON schema provided
     + statvalue - the value of the statistic
 
 # Deployment Diagram
-![Alt text](/img/LDRLY-Leaderboard-Depoyment-Diagram.png)
+![Alt text](http://ldrly.geekatron.org/img/LDRLY-Leaderboard-Depoyment-Diagram.png)
 
 # Configuration
 

@@ -64,6 +64,12 @@ Sample JSON schema provided
 * Homepage - returns an HTML page representing the leaderboard
     + Searching by a stat name will return the leaderboard, from highest to lowest value
     + Searching by the player will return all the stats associated to that player via the API
+## /statistics/index.html
+* Set Statistic - returns an HTML page so the user can set stats
+    + username - the username to set the stats against
+    + statname - the name of the statistic
+    + statvalue - the value of the statistic
+
 
 # Configuration
 

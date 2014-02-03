@@ -37,6 +37,7 @@ module.exports = function (grunt) {
                     'views/template/layouts/template_onecolumn.js',
                     'views/template/layouts/template_twocolumn.js',
                     'views/template/home/template_home.js',
+                    'views/template/statistics/template_statistics.js',
                     'views/template/github/template_github.js',
 
                     //Add the rest of the template JS files here for concatenation
@@ -49,6 +50,7 @@ module.exports = function (grunt) {
                     /* View Models */
                     'public/js/app/src/viewmodel/vm_helper.js',
                     'public/js/app/src/viewmodel/home/vm_home.js',
+                    'public/js/app/src/viewmodel/statistics/vm_statistics.js',
 
                 ],
                 dest: 'public/js/app/build/<%= pkg.name %>.js'
@@ -62,6 +64,7 @@ module.exports = function (grunt) {
                     'views/template/layouts/template_onecolumn.js',
                     'views/template/layouts/template_twocolumn.js',
                     'views/template/home/template_home.js',
+                    'views/template/statistics/template_statistics.js',
                     'views/template/github/template_github.js'
                     //Add the more templates
                 ],

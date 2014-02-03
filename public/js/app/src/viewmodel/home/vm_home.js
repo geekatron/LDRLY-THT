@@ -58,10 +58,11 @@ ldrly.viewmodel.Leaderboard = function (args) {
         var statname = $('#statname').val();
 
         //Clear the error message
-        $('#err-msg').text('');
+        //$('#err-msg').text('');
+        //Show the status
+        ldrly.viewmodel.helper.showStatus();
 
         function handleLeaderboard(err, data) {
-            ldrly.viewmodel.helper.showStatus();
 
             if (err) {
                 console.error(err);
@@ -77,26 +78,35 @@ ldrly.viewmodel.Leaderboard = function (args) {
             }
         }//END handleLeaderboard
 
-        //Retrieve the leaderboard for the specified stat
-        ldrly.integration.rest.stats.leaderboard(statname, handleLeaderboard);
+        //Check to make sure the statname is specified
+        if (!_.isUndefined(statname) && !_.isNull(statname)) {
+            if (statname.length > 0) {
+                //Retrieve the leaderboard for the specified stat
+                ldrly.integration.rest.stats.leaderboard(statname, handleLeaderboard);
+            } else {
+                ldrly.viewmodel.helper.errorStatus('Missing Stat Name!!');
+            }
+        } else {
+            ldrly.viewmodel.helper.errorStatus('Missing Stat Name!!');
+        }
     };
 
     self.retrieveUserStats = function (data) {
         var username = $('#username').val();
 
         //Clear the error message
-        $('#err-msg').text('');
+        //$('#err-msg').text('');
+        //Show the status
+        ldrly.viewmodel.helper.showStatus();
 
-        function handleLeaderboard(err, data) {
-            ldrly.viewmodel.helper.showStatus();
-
+        function handleUserStats(err, data) {
             if (err) {
                 console.error(err);
                 //Show error message
-                ldrly.viewmodel.helper.errorStatus('Error retrieving Leaderboard!');
+                ldrly.viewmodel.helper.errorStatus('Error retrieving user statistics!');
             } else {
                 //Show success message
-                ldrly.viewmodel.helper.successStatus('Leaderboard Retrieved!!');
+                ldrly.viewmodel.helper.successStatus('User statistics retrieved!!');
                 //Set the data
                 self.userstats = ko.observableArray(data);
                 //Set the state to show the appropriate table
@@ -104,8 +114,19 @@ ldrly.viewmodel.Leaderboard = function (args) {
             }
         }//END handleLeaderboard
 
-        //Retrieve the stats for the specified username
-        ldrly.integration.rest.stats.retrieve(username, handleLeaderboard);
+        //Check to make sure the username is specified
+        if (!_.isUndefined(username) && !_.isNull(username)) {
+            if (username.length > 0) {
+                //Retrieve the stats for the specified username
+                ldrly.integration.rest.stats.retrieve(username, handleUserStats);
+            } else {
+                ldrly.viewmodel.helper.errorStatus('Missing username!!');
+            }
+
+        } else {
+            ldrly.viewmodel.helper.errorStatus('Missing username!!');
+        }
+
     };
 
 

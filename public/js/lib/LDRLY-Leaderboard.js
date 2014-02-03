@@ -1169,7 +1169,7 @@ ui.template.ldrly.home.leaderboard.search =
         '<tbody>' +
             '<tr>' +
                 '<td>' +
-                    '<input id="username" type="text" class="form-control col-md-8" placeholder="e.g. player0">' +
+                    '<input id="username" type="text" class="form-control col-md-8" placeholder="e.g. player0" required="">' +
                 '</td>' +
                 '<td>' +
                     '<button type="button" data-bind="click: retrieveUserStats" class="btn btn-default">' +
@@ -1177,7 +1177,7 @@ ui.template.ldrly.home.leaderboard.search =
                     '</button>' +
                 '</td>' +
                 '<td>' +
-                    '<input id="statname" type="text" class="form-control col-xs-8" placeholder="e.g. wins">' +
+                    '<input id="statname" type="text" class="form-control col-xs-8" placeholder="e.g. wins" required="">' +
                 '</td>' +
                 '<td>' +
                     '<button type="button" data-bind="click: retrieveLeaderboard" class="btn btn-primary">' +
@@ -1245,6 +1245,134 @@ ui.template.ldrly.home.page =
         "<html>" +
         ui.template.ldrly.home.head +
         ui.template.ldrly.home.body +
+        "</html>";
+
+
+/*jslint browser: true */
+/*jslint devel: true */
+/*jslint nomen: true */
+/*global $, jQuery, _, ko, Mustache */
+/*global ldrly */
+"use strict";
+
+/*  =============================================
+ Mustache template for LDRLY Home Page
+ ============================================= */
+
+//ui.template.ldrly.stats = {};
+//ui.template.ldrly.stats.page = ui.template.ldrly.layout.onecolumn.page;
+
+ui.template.ldrly.stats = {};
+ui.template.ldrly.stats.leaderboard = {};
+
+ui.template.ldrly.stats.leaderboard.create =
+    '<table class="table table-striped well">' +
+        '<thead>' +
+            '<tr class="text-center">' +
+                '<th>Username</th>' +
+                '<th>Stat Name</th>' +
+                '<th>Stat Value</th>' +
+                '<th></th>' +
+            '</tr>' +
+        '</thead>' +
+        '<tbody>' +
+            '<tr>' +
+                '<td>' +
+                    '<input id="username" type="text" class="form-control" data-type="value: username" placeholder="e.g. player0" required>' +
+                '</td>' +
+                '<td>' +
+                    '<input id="statname" type="text" class="form-control" data-type="value: statname" placeholder="e.g. coins_earned" required>' +
+                '</td>' +
+                '<td>' +
+                    '<input id="statvalue" type="number" class="form-control" data-type="value: statvalue" placeholder="e.g. 456" required>' +
+                '</td>' +
+                '<td>' +
+                    '<button type="button" data-bind="click: setUserStat" class="btn btn-default">' +
+                        '<span class="glyphicon glyphicon-user">Set Stat</span>' +
+                    '</button>' +
+                '</td>' +
+            '</tr>' +
+        '</tbody>' +
+    '</table>' +
+    '<!-- ko if: state() === 1 -->' +
+        '<div class="well">' +
+            '<p data-bind="text: response"></p>' +
+        '</div>' +
+//        '<table class="table table-striped well">' +
+//            '<thead>' +
+//                '<tr>' +
+//                    '<th>Stat Name</th>' +
+//                    '<th>Stat Value</th>' +
+//                '</tr>' +
+//            '</thead>' +
+//            '<tbody data-bind="foreach: userstats()">' +
+//                '<tr>' +
+//                    '<td>' +
+//                        '<div data-bind="text: name"></div>' +
+//                    '</td>' +
+//                    '<td>' +
+//                        '<div data-bind="text: value"></div>' +
+//                    '</td>' +
+//                '</tr>' +
+//            '</tbody>' +
+//        '</table>' +
+    '<!-- /ko -->';;
+
+ui.template.ldrly.stats.leaderboard.content =
+    ui.template.ldrly.stats.leaderboard.create;
+
+
+ui.template.ldrly.stats.column =
+    "<div class='text-center'>" +
+        "<div class='page-header'>" +
+            "<h1>{{title}} <small>({{acronym}})</small></h1>" +
+        "</div>" +
+        "{{#description}}" +
+        "<p>{{.}}</p>" +
+        "{{/description}}" +
+        ui.template.ldrly.stats.leaderboard.content +
+    "</div>";
+
+ui.template.ldrly.stats.content =
+    "<script>" +
+        "jQuery(document).ready(function(){" +
+        '   var viewModel = new ldrly.viewmodel.Statistics(); ' +
+        '   ko.applyBindings(viewModel); ' +
+        '});' +
+    "</script>" +
+    "<div id='columns' class='container'>" +
+        "<div class='row'>" +
+            ui.template.ldrly.error +
+        "</div>" +
+        "<div class='row content home'>" +
+            ui.template.ldrly.stats.column +
+        "</div>" +
+    "</div>";
+
+ui.template.ldrly.stats.head = ui.template.global.page.head;
+
+ui.template.ldrly.stats.body =
+    "<body>" +
+        "<!-- Global Libs-->" +
+        "{{#global.libs}}" +
+        "<script src='{{{src}}}'></script>" +
+        "{{/global.libs}}" +
+        "<!-- /Global Libs-->" +
+        "<!-- Local Libs-->" +
+        "{{#libs}}" +
+        "<script src='{{{src}}}'></script>" +
+        "{{/libs}}" +
+        "<!-- /Local Libs-->" +
+        ui.template.global.menuNoStatus +
+        ui.template.ldrly.stats.content +
+        ui.template.global.footer +
+    "</body>";
+
+ui.template.ldrly.stats.page =
+    "<!DOCTYPE html>" +
+        "<html>" +
+            ui.template.ldrly.stats.head +
+            ui.template.ldrly.stats.body +
         "</html>";
 
 
@@ -1980,10 +2108,11 @@ ldrly.viewmodel.Leaderboard = function (args) {
         var statname = $('#statname').val();
 
         //Clear the error message
-        $('#err-msg').text('');
+        //$('#err-msg').text('');
+        //Show the status
+        ldrly.viewmodel.helper.showStatus();
 
         function handleLeaderboard(err, data) {
-            ldrly.viewmodel.helper.showStatus();
 
             if (err) {
                 console.error(err);
@@ -1999,26 +2128,35 @@ ldrly.viewmodel.Leaderboard = function (args) {
             }
         }//END handleLeaderboard
 
-        //Retrieve the leaderboard for the specified stat
-        ldrly.integration.rest.stats.leaderboard(statname, handleLeaderboard);
+        //Check to make sure the statname is specified
+        if (!_.isUndefined(statname) && !_.isNull(statname)) {
+            if (statname.length > 0) {
+                //Retrieve the leaderboard for the specified stat
+                ldrly.integration.rest.stats.leaderboard(statname, handleLeaderboard);
+            } else {
+                ldrly.viewmodel.helper.errorStatus('Missing Stat Name!!');
+            }
+        } else {
+            ldrly.viewmodel.helper.errorStatus('Missing Stat Name!!');
+        }
     };
 
     self.retrieveUserStats = function (data) {
         var username = $('#username').val();
 
         //Clear the error message
-        $('#err-msg').text('');
+        //$('#err-msg').text('');
+        //Show the status
+        ldrly.viewmodel.helper.showStatus();
 
-        function handleLeaderboard(err, data) {
-            ldrly.viewmodel.helper.showStatus();
-
+        function handleUserStats(err, data) {
             if (err) {
                 console.error(err);
                 //Show error message
-                ldrly.viewmodel.helper.errorStatus('Error retrieving Leaderboard!');
+                ldrly.viewmodel.helper.errorStatus('Error retrieving user statistics!');
             } else {
                 //Show success message
-                ldrly.viewmodel.helper.successStatus('Leaderboard Retrieved!!');
+                ldrly.viewmodel.helper.successStatus('User statistics retrieved!!');
                 //Set the data
                 self.userstats = ko.observableArray(data);
                 //Set the state to show the appropriate table
@@ -2026,8 +2164,128 @@ ldrly.viewmodel.Leaderboard = function (args) {
             }
         }//END handleLeaderboard
 
-        //Retrieve the stats for the specified username
-        ldrly.integration.rest.stats.retrieve(username, handleLeaderboard);
+        //Check to make sure the username is specified
+        if (!_.isUndefined(username) && !_.isNull(username)) {
+            if (username.length > 0) {
+                //Retrieve the stats for the specified username
+                ldrly.integration.rest.stats.retrieve(username, handleUserStats);
+            } else {
+                ldrly.viewmodel.helper.errorStatus('Missing username!!');
+            }
+
+        } else {
+            ldrly.viewmodel.helper.errorStatus('Missing username!!');
+        }
+
+    };
+
+
+    /** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **
+     **                 Initialize the View Model                **
+     ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** */
+    (function () {
+        /* set the state of the view model */
+        self.state(0);
+
+        function initVM() {
+
+
+        }//END document ready
+
+        initVM();
+    }());
+
+};
+/*jslint browser: true */
+/*jslint devel: true */
+/*jslint nomen: true */
+/*global $, jQuery, _, ko, Mustache */
+/*global ldrly */
+"use strict";
+
+/*  =============================================
+ View Model for Leaderboard
+ ============================================= */
+ldrly.viewmodel.Statistics = {};
+
+/**
+ * View models for the Interview Prep Profile.
+ * @params args - Arguments expected by the constructor.
+ *
+ * @constructor
+ */
+ldrly.viewmodel.Statistics = function (args) {
+    var self = this,
+        err_msg = "";
+
+    /* View related observables */
+    self.state = ko.observable(0);
+    self.simulate = ko.observable();
+
+    self.username = ko.observable(); //Store the Username
+    self.statname = ko.observable(); //Store the Statistic Name
+    self.statvalue = ko.observable(); //Store the Statistic Value
+
+    self.response = ko.observable(); //Store the response to the update
+
+    /** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **
+     **            Private functionality/behaviours              **
+     ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** */
+
+
+    /** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **
+     **             Helper functionality/behaviours              **
+     ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** */
+
+    /** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **
+     **         Operations/behaviour to assist Views             **
+     ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** */
+
+
+    /** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **
+     **         Operations/behaviour related to Leaderboard       **
+     ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** */
+
+    self.setUserStat = function (data) {
+        var username = $('#username').val(),
+            statname = $('#statname').val(),
+            statvalue = $('#statvalue').val();
+
+        //Clear the error message
+        //$('#err-msg').text('');
+        //Show the status
+        ldrly.viewmodel.helper.showStatus();
+
+        function handleSetStatResponse(err, data) {
+            if (err) {
+                console.error(err);
+                //Show error message
+                ldrly.viewmodel.helper.errorStatus('Error setting statistic!!');
+            } else {
+                //Show success message
+                ldrly.viewmodel.helper.successStatus('Statistic set!!');
+                //Set the data
+                self.response(JSON.stringify(data));
+                //Set the state to show the appropriate table
+                self.state(1);
+            }
+        }//END handleSetStatResponse
+
+        //Check to make sure the username, statname and password are specified
+        if (!_.isUndefined(username) && !_.isNull(username) && username.length > 0) {
+            if (!_.isUndefined(statname) && !_.isNull(statname) && statname.length > 0) {
+                if (!_.isUndefined(statvalue) && !_.isNull(statvalue) && statvalue.length > 0) {
+                    //Retrieve the stats for the specified username
+                    ldrly.integration.rest.stats.retrieve(username, handleSetStatResponse);
+                } else {
+                    ldrly.viewmodel.helper.errorStatus('Missing Stat Value!!');
+                }
+            } else {
+                ldrly.viewmodel.helper.errorStatus('Missing Stat Name!!');
+            }
+        } else {
+            ldrly.viewmodel.helper.errorStatus('Missing Username!!');
+        }
     };
 
 

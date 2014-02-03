@@ -137,9 +137,9 @@ module.exports = function (app) {
     });
 
     /**
-     * Route to display the GitHub Project (/github/index.html)
+     * Route to display the statistics  (/statistics/index.html)
      */
-    app.get('/github/:slug', function (req, res, next) {
+    app.get('/statistics/:slug', function (req, res, next) {
         var slug = [req.params.slug][0], // grab the page slug
             resource = req.params[0],
             path = 'app/',
@@ -158,7 +158,7 @@ module.exports = function (app) {
 
         if (slug === 'index.html') {
             //Render the GitHub Template Page
-            html = Mustache.render(template.ldrly.github.page, data);
+            html = Mustache.render(template.ldrly.stats.page, data);
             res.send(html);
         } else {
             next();

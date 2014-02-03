@@ -84,7 +84,7 @@ ui.template.ldrly.home.leaderboard.search =
         '<tbody>' +
             '<tr>' +
                 '<td>' +
-                    '<input id="username" type="text" class="form-control col-md-8" placeholder="e.g. player0">' +
+                    '<input id="username" type="text" class="form-control col-md-8" placeholder="e.g. player0" required="">' +
                 '</td>' +
                 '<td>' +
                     '<button type="button" data-bind="click: retrieveUserStats" class="btn btn-default">' +
@@ -92,7 +92,7 @@ ui.template.ldrly.home.leaderboard.search =
                     '</button>' +
                 '</td>' +
                 '<td>' +
-                    '<input id="statname" type="text" class="form-control col-xs-8" placeholder="e.g. wins">' +
+                    '<input id="statname" type="text" class="form-control col-xs-8" placeholder="e.g. wins" required="">' +
                 '</td>' +
                 '<td>' +
                     '<button type="button" data-bind="click: retrieveLeaderboard" class="btn btn-primary">' +

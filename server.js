@@ -40,7 +40,7 @@ require('./libs/config/environment.js')(app, express);
 //Route to support CORS
 require('./routes/routes_cors')(app);
 //Route for HTML content
-//require('./routes/routes_html')(app);
+require('./routes/routes_html')(app);
 //Route for the service
 require('./routes/routes_leaderboard')(app);
 

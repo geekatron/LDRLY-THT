@@ -1,0 +1,46 @@
+{
+    "libs" : [
+    ],
+    "style" : [
+        {
+            "href" : "",
+            "rel" : "stylesheet",
+            "media" : "screen"
+        }
+    ],
+    "menu" :
+        [
+            {
+                "name" : "Home",
+                "url" : "/",
+                "active" : "active",
+                "icon" : "glyphicon glyphicon-home"
+            },
+            {
+                "name" : "Statistics",
+                "url" : "/statistics/index.html",
+                "active" : "",
+                "icon" : "glyphicon glyphicon-tower",
+                "style" : ""
+            },
+            {
+                "name" : "Users",
+                "url" : "/users/index.html",
+                "active" : "",
+                "icon" : "glyphicon glyphicon-user",
+                "style" : ""
+            },
+            {
+                "name" : "",
+                "url" : "/config/index.html",
+                "active" : "",
+                "icon" : "glyphicon glyphicon-wrench"
+            }
+        ],
+    "title" : "LDRLY - Leaderboard",
+    "acronym" : "LDRLY",
+    "description" : [
+        "Here you will be able to look up stats about players.",
+        "You can also add and modify stats - enjoy!"
+    ]
+}

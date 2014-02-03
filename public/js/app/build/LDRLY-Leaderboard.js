@@ -2105,7 +2105,7 @@ ldrly.viewmodel.Leaderboard = function (args) {
      **         Operations/behaviour related to Leaderboard       **
      ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** */
     self.retrieveLeaderboard = function (data) {
-        var statname = $('#statname').val();
+        var statname = $('#statname').val().toLocaleLowerCase();
 
         //Clear the error message
         //$('#err-msg').text('');
@@ -2174,7 +2174,7 @@ ldrly.viewmodel.Leaderboard = function (args) {
         if (!_.isUndefined(username) && !_.isNull(username)) {
             if (username.length > 0) {
                 //Retrieve the stats for the specified username
-                ldrly.integration.rest.stats.retrieve(username, handleUserStats);
+                ldrly.integration.rest.stats.retrieve(username.toLocaleLowerCase(), handleUserStats);
             } else {
                 ldrly.viewmodel.helper.errorStatus('Missing username!!');
             }

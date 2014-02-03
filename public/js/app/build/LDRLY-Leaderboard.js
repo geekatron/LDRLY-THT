@@ -1487,7 +1487,10 @@ ldrly.integration.rest.stats.set = function (username, statname, data, callback)
         endpoints = ldrly.config.getEndPoints(),
         url_base = endpoints.ldrly.url,
         url_resource = '/leaderboard/user/' + username + '/stat/' + statname,
-        url = url_base + url_resource;
+        url = url_base + url_resource,
+        data = {
+            "value" : data
+        };
 
     var request = $.ajax(
         {
@@ -2282,7 +2285,7 @@ ldrly.viewmodel.Statistics = function (args) {
             if (!_.isUndefined(statname) && !_.isNull(statname) && statname.length > 0) {
                 if (!_.isUndefined(statvalue) && !_.isNull(statvalue) && statvalue.length > 0) {
                     //Retrieve the stats for the specified username
-                    ldrly.integration.rest.stats.retrieve(username, handleSetStatResponse);
+                    ldrly.integration.rest.stats.set(username, statname, statvalue, handleSetStatResponse);
                 } else {
                     ldrly.viewmodel.helper.errorStatus('Missing Stat Value!!');
                 }

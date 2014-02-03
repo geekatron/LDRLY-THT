@@ -20,7 +20,10 @@ ldrly.integration.rest.stats.set = function (username, statname, data, callback)
         endpoints = ldrly.config.getEndPoints(),
         url_base = endpoints.ldrly.url,
         url_resource = '/leaderboard/user/' + username + '/stat/' + statname,
-        url = url_base + url_resource;
+        url = url_base + url_resource,
+        data = {
+            "value" : data
+        };
 
     var request = $.ajax(
         {

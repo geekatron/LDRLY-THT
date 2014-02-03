@@ -2157,8 +2157,14 @@ ldrly.viewmodel.Leaderboard = function (args) {
             } else {
                 //Show success message
                 ldrly.viewmodel.helper.successStatus('User statistics retrieved!!');
+
+//                self.state(1);
+                //Remove the previous data
+                self.userstats.removeAll();
+
                 //Set the data
-                self.userstats = ko.observableArray(data);
+                self.userstats(data);
+
                 //Set the state to show the appropriate table
                 self.state(2);
             }

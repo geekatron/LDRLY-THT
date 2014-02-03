@@ -1,7 +1,7 @@
 /**
  * Created with WebStorm.
  * Date: 2/3/2014
- * Time: 1:19 AM
+ * Time: 1:28 AM
  * @author Adam C. Nowak
  * @description
  */
@@ -11,18 +11,16 @@
 "use strict";
 
 //Required Modules
+var env = require('../../../config/endpoint.js');
+//Required Modules
 var _ = require("underscore"),
     mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
-var userSchema = new Schema({
+var statisticSchema = new Schema({
         type : String,
-        firstName : String,
-        lastName : String,
-        profile : String,
-        email : String,
-        username : String,
-        stats : [{ type : Schema.Types.ObjectId, ref: 'Statistic'}],
+        name : String,
+        value : String,
         created : String,
         lastmodified : String
     },
@@ -32,4 +30,4 @@ var userSchema = new Schema({
 
 
 //Export the Content Object
-module.exports = userSchema;
+module.exports = statisticSchema;

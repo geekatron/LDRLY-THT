@@ -53,5 +53,10 @@ Endpoint configuration driven by Environmental Variables. Please see below for m
     + :sname - The stat name
     + Messagebody: { "value" : 10 }
 ## /leaderboard/stat/:sname
-* Send a GET request in-order to retrieve the Leaderboard, redpresenred as a JSON object, sorted from highest value to lowest
+* Send a GET request in-order to retrieve the Leaderboard, represented a JSON object, sorted from highest value to lowest
     + :sname - The specified stat name
+## /index.html
+* Homepage - returns an HTML page representing the leaderboard
+    + Searching by a stat name will return the leaderboard, from highest to lowest value
+    + Searching by the player will return all the stats associated to that player via the API
+

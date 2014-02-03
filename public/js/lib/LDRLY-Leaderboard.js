@@ -714,11 +714,11 @@ ui.template.global.page.head =
 
 ui.template.global.menuNoStatus =
     '<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">' +
-        '<div class="container>' +
+        '<div class="container-fluid>' +
             '<div class="navbar-header">' +
                 '<!-- Responsive Navbar Part 1: Button for triggering responsive navbar.  -->' +
-                '<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">' +
-                    '<span class="sr-only">Toggle navigation</span>' +
+                '<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">' +
+//                    '<span class="sr-only">Toggle navigation</span>' +
                     '<span class="icon-bar"></span>' +
                     '<span class="icon-bar"></span>' +
                     '<span class="icon-bar"></span>' +
@@ -728,7 +728,7 @@ ui.template.global.menuNoStatus =
 //                            '{{global.project.acronym}}' +
                 '</a>' +
                 '<!-- Responsive Navbar Part 2: Place all navbar contents you want collaposed within .navbar-collapse.collapse -->' +
-                '<div class="nav-collapse collapse" style="height: 1px;">' +
+                '<div class="collapse nav-collapse">' +
                     '<ul class="nav navbar-nav pull-right"> ' +
                         '{{#menu}}' +
                         '<li class="{{active}}"><a href="{{url}}"><i class="{{icon}}"></i>{{name}}</a></li>' +
@@ -2258,7 +2258,7 @@ ldrly.viewmodel.Statistics = function (args) {
     self.setUserStat = function (data) {
         var username = $('#username').val().toLowerCase(),
             statname = $('#statname').val().toLowerCase(),
-            statvalue = $('#statvalue').val().toLowerCase();
+            statvalue = $('#statvalue').val();
 
         //Clear the error message
         //$('#err-msg').text('');

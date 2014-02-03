@@ -1,6 +1,3 @@
-LDRLY-THT
-=======
-
 # LDRLY Development - Take Home Test
 ## Description
 Create a simple HTTP based REST based API that implements three methods, sendStat,

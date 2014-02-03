@@ -136,6 +136,36 @@ module.exports = function (app) {
 
     });
 
+    /**
+     * Route to display the GitHub Project (/github/index.html)
+     */
+    app.get('/github/:slug', function (req, res, next) {
+        var slug = [req.params.slug][0], // grab the page slug
+            resource = req.params[0],
+            path = 'app/',
+            file = path + slug,
+            html,
+            params = req.params[0],
+            data,
+            debug = req.query.debug;
+
+        logReqInfo(slug, resource, path, file);
+
+        //Setup the Data for the Mustache Template
+        data = templatedata.data.ipp;
+        data.global = templatedata.data.global;
+        //data.user = req.user;
+
+        if (slug === 'index.html') {
+            //Render the GitHub Template Page
+            html = Mustache.render(template.ldrly.github.page, data);
+            res.send(html);
+        } else {
+            next();
+        }
+
+    });
+
 //    /**
 //     * Route to display the Leaderboard Statistics (/statistics/index.html)
 //     */

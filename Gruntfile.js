@@ -37,6 +37,7 @@ module.exports = function (grunt) {
                     'views/template/layouts/template_onecolumn.js',
                     'views/template/layouts/template_twocolumn.js',
                     'views/template/home/template_home.js',
+                    'views/template/github/template_github.js',
 
                     //Add the rest of the template JS files here for concatenation
 
@@ -60,7 +61,8 @@ module.exports = function (grunt) {
                     'views/template/layouts/template_layouts.js',
                     'views/template/layouts/template_onecolumn.js',
                     'views/template/layouts/template_twocolumn.js',
-                    'views/template/home/template_home.js'
+                    'views/template/home/template_home.js',
+                    'views/template/github/template_github.js'
                     //Add the more templates
                 ],
                 dest: 'views/template.js'

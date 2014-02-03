@@ -24,10 +24,10 @@
                 "style" : ""
             },
             {
-                "name" : "Users",
-                "url" : "/users/index.html",
+                "name" : "GitHub Project",
+                "url" : "https://github.com/geekatron/LDRLY-THT",
                 "active" : "",
-                "icon" : "glyphicon glyphicon-user",
+                "icon" : "glyphicon glyphicon-flash",
                 "style" : ""
             },
             {

@@ -1,0 +1,39 @@
+{
+    "libs" : [
+    ],
+    "style" : [
+        {
+            "href" : "",
+            "rel" : "stylesheet",
+            "media" : "screen"
+        }
+    ],
+    "menu" :
+        [
+            {
+                "name" : "Home",
+                "url" : "/",
+                "active" : "",
+                "icon" : "glyphicon glyphicon-home"
+            },
+            {
+                "name" : "Statistics",
+                "url" : "/statistics/index.html",
+                "active" : "",
+                "icon" : "glyphicon glyphicon-tower",
+                "style" : ""
+            },
+            {
+                "name" : "GitHub Source",
+                "url" : "/github/index.html",
+                "active" : "active",
+                "icon" : "glyphicon glyphicon-flash",
+                "style" : ""
+            }
+        ],
+    "title" : "LDRLY - Leaderboard",
+    "acronym" : "LDRLY",
+    "description" : [
+        "See below for GitHub project. Enjoy!"
+    ]
+}

@@ -40,5 +40,18 @@ Endpoint configuration driven by Environmental Variables. Please see below for m
  * MONGOHQ_URL
      + heroku config:add MONGOHQ_URL=mongodb://username:password@troup.mongohq.com:10075/app21866780
 
-# Sample Deployment
-## Deployment Architecture
+# Routes
+## /leaderboard/populate/with/sample/data/homeslice
+* Send a POST request to this resource in-order to populate with sample data
+    + 100 Users where each users has 10 stats
+## /leaderboard/user/:uname/stats
+* Send a GET request in-order to retruns a JSON list of all the stats submitted to the API for the specified user
+    + :uname - The specified user
+## /leaderboard/user/:uname/stat/:sname
+* Send a PUT request in-order to store a stat name and value against a specific user
+    + :uname - The specified user
+    + :sname - The stat name
+    + Messagebody: { "value" : 10 }
+## /leaderboard/stat/:sname
+* Send a GET request in-order to retrieve the Leaderboard, redpresenred as a JSON object, sorted from highest value to lowest
+    + :sname - The specified stat name

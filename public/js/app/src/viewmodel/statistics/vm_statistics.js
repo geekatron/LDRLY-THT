@@ -57,8 +57,8 @@ ldrly.viewmodel.Statistics = function (args) {
      ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** */
 
     self.setUserStat = function (data) {
-        var username = $('#username').val(),
-            statname = $('#statname').val(),
+        var username = $('#username').val().toLowerCase(),
+            statname = $('#statname').val().toLowerCase(),
             statvalue = $('#statvalue').val();
 
         //Clear the error message

@@ -22,6 +22,7 @@ var errors = require('../libs/error/abstracterror'),
 //Include npm modules
     _ = require("underscore"),
     S = require('string'),
+    rn = require('random-number'),
     transport = null;
 
 module.exports = function (app) {
@@ -39,7 +40,75 @@ module.exports = function (app) {
             res.send(200, { message : 'Tada!'});
     });
 
+    //  leaderboard/populate/with/sample/data/homeslice
+    /**
+     *
+     */
+    app.post('/leaderboard/populate/with/sample/data/homeslice', function (req, res) {
+        var usernamebase = "player",
+            stats = [
+                "deaths",
+                "kills",
+                "wins",
+                "losses",
+                "domination",
+                "headshots",
+                "enemies",
+                "mvp",
+                "draws",
+                "quits"
+            ],
+            userindex = 0,
+            userstatistics = [];
+
+        function handlePopulatedSampleData(err, data) {
+            if (err) {
+                //Error - print & return
+                console.error(err);
+                res.send(500, err);
+            } else {
+                //Sample Data successfully populated!
+                res.send(200, { message : 'Sample data is populated ┗(^o^ )┓!!!'});
+            }
+        }//END handlePopulatedSampleData
+
+        function forEachStat(element, index, key) {
+            var statistic = {
+                type : type,
+                username : usernamebase + userindex,
+                name : element,
+                value : rn({
+                    min : 0,
+                    max : 100000,
+                    integer : true
+                }),
+                created : new Date().toISOString()
+
+            };
+            //Add the user statistic
+            userstatistics.push(statistic)
+        }
+
+        function populateSampleData() {
+            //Generate 100 Users
+            for (var i = 0; i < 100; i++) {
+                //Create a 10 new statistics for the player
+                userindex = i;
+                _.each(stats, forEachStat);
+            }//END for
+
+            //Persist all the stats to the database
+            Statistic.create(userstatistics, handlePopulatedSampleData())
+
+        }//END populateSampleData
+
+        // Populate the Sample Data
+        populateSampleData();
+    });
+
     //  leaderboard/user
+
+
     //  leaderboard/user/name -> GET/PUT
     app.get('/leaderboard/user/:uname', function (req, res) {
         var username = req.param('uname');

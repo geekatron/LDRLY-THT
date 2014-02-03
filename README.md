@@ -70,6 +70,8 @@ Sample JSON schema provided
     + statname - the name of the statistic
     + statvalue - the value of the statistic
 
+# Deployment Diagram
+![Alt text](/img/LDRLY-Leaderboard-Depoyment-Diagram.png)
 
 # Configuration
 

@@ -3,7 +3,7 @@
         "name" : "LDRLY - Leaderboard",
         "acronym" : "LDRLY",
         "slogan" : "Intelligence made simple yet powerful...",
-        "icon" : "./img/logo-small.png",
+        "icon" : "/img/logo-small.png",
         "company" : "LDRLY"
     },
     "libs" : [

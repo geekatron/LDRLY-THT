@@ -11,10 +11,10 @@
 /*jslint devel: true */
 /*jslint nomen: true */
 /*global $, jQuery, _, ko, Mustache */
-/*global sip */
+/*global ldrly */
 "use strict";
 
-//sip.m.template = {};
+//ldrly.m.template = {};
 var ui = {};
 ui.template = {};
 ui.template.ldrly = {};

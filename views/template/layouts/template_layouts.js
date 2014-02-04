@@ -10,11 +10,11 @@
 /*jslint devel: true */
 /*jslint nomen: true */
 /*global $, jQuery, _, ko, Mustache */
-/*global sip */
+/*global ldrly */
 "use strict";
 
 /*  =============================================
- Layouts (Mustache template)for SIP
+ Layouts (Mustache template)for ldrly
  ============================================= */
 //Layout Namespace declarations
 if (!ui.template.ldrly) {

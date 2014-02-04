@@ -7,7 +7,7 @@
 /*global ldrly */
 'use strict';
 
-//Setup the Namespace for the SIP Client Library
+//Setup the Namespace for the ldrly Client Library
 if (ldrly) {
     console.log('LDRLY namespace exists!');
 } else {
@@ -100,7 +100,7 @@ ldrly.Configuration = function (args) {
     };
 
 };
-//Create a new instance/class of the SIP Configuration
+//Create a new instance/class of the ldrly Configuration
 ldrly.config = new ldrly.Configuration(null);
 /*jslint browser: true */
 /*jslint devel: true */
@@ -794,7 +794,7 @@ ui.template.global.modal.error.xhr =
 /*jslint devel: true */
 /*jslint nomen: true */
 /*global $, jQuery, _, ko, Mustache */
-/*global sip */
+/*global ldrly */
 "use strict";
 
 /*  =============================================
@@ -904,11 +904,11 @@ ui.template.global.error.s500.page =
 /*jslint devel: true */
 /*jslint nomen: true */
 /*global $, jQuery, _, ko, Mustache */
-/*global sip */
+/*global ldrly */
 "use strict";
 
 /*  =============================================
- Layouts (Mustache template)for SIP
+ Layouts (Mustache template)for ldrly
  ============================================= */
 //Layout Namespace declarations
 if (!ui.template.ldrly) {

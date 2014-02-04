@@ -10,7 +10,7 @@
 
 "use strict";
 
-//SIP required artifacts
+//ldrly required artifacts
 var routing_error = require('../libs/utils/routing/routing_error'),
     env = require('../libs/config/endpoint.js'),
     TemplateData = require('../libs/template/templatedata'),

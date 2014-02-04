@@ -92,7 +92,7 @@ Endpoint configuration driven by Environmental Variables. Please see below for m
 * Node Parameters:
     + --debug
 * Working directory:
-    + /Users/geekatron/workspace/Webstorm/Planet R&D/SIP
+    + /Users/geekatron/workspace/Webstorm/Planet R&D/LDRLY-THT
 * Path to Node App JS File:
     + server.js
 * Application Parameters:

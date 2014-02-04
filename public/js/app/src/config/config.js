@@ -13,7 +13,7 @@
 /*global ldrly */
 'use strict';
 
-//Setup the Namespace for the SIP Client Library
+//Setup the Namespace for the ldrly Client Library
 if (ldrly) {
     console.log('LDRLY namespace exists!');
 } else {
@@ -106,5 +106,5 @@ ldrly.Configuration = function (args) {
     };
 
 };
-//Create a new instance/class of the SIP Configuration
+//Create a new instance/class of the ldrly Configuration
 ldrly.config = new ldrly.Configuration(null);

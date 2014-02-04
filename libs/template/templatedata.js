@@ -11,7 +11,7 @@
 /*jslint devel: true */
 /*jslint nomen: true */
 /*global $, jQuery, _, ko, Mustache */
-/*global sip */
+/*global ldrly */
 "use strict";
 
 //Required modules

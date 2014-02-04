@@ -224,7 +224,7 @@ ui.template.global.error.s404.content =
         '</div>';
 ui.template.global.error.s404.body =
     '<body id="error_page">' +
-        ui.template.global.menu +
+        ui.template.global.menuNoStatus +
         ui.template.global.error.s404.content +
 //        ui.template.global.footer +
     '<!-- Global Libs-->' +
@@ -273,7 +273,7 @@ ui.template.global.error.s500.content =
         '</div>';
 ui.template.global.error.s500.body =
     '<body id="error_page">' +
-        ui.template.global.menu +
+        ui.template.global.menuNoStatus +
         ui.template.global.error.s500.content +
 //        ui.template.global.footer +
     '<!-- Global Libs-->' +

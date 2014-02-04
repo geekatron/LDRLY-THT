@@ -43,6 +43,9 @@ require('./routes/routes_cors')(app);
 require('./routes/routes_html')(app);
 //Route for the service
 require('./routes/routes_leaderboard')(app);
+//Error routing - Keep last!
+//require('./routes/routes_errors')(app);
+
 
 // start server
 app.listen(processport);

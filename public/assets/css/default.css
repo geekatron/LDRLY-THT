@@ -20,6 +20,46 @@ body {
 }
 
 /*********************************
+*       Style for the ERROR     *
+**********************************/
+
+#error_page {
+    background-color: #0000ff;
+    color: #ffffff;
+
+    /*padding-top: 25%;*/
+
+    padding-top: 60px;
+    padding-left: 25px;
+    font-family: "Lucida Console";
+}
+
+#error_page .err-title {
+    display: inline-block;
+
+    background-color: #808080;
+    color: #000000;
+}
+
+#error_page .err-msg  {
+    padding-top: 20px;
+}
+
+#error_page .err-img  {
+    height: 50%;
+}
+
+#error_page .err-img-right  {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+#error_page .err-bullet  {
+    float: left;
+}
+
+/*********************************
 *       Style for the HEADER     *
 **********************************/
 .navbar-brand img {

@@ -13,16 +13,18 @@
 var newrelic = require('newrelic'),
     http = require('http'),
     path = require('path'),
+    routing_error = require('../utils/routing/routing_error'),
     errors = require('../error/abstracterror'),
 //Required in-order to render HTML Templates
     Mustache = require('mustache'),
 //Required Templates
-    TemplateData = require('../template/templatedata');
-    //template = require('../../views/template');
+    TemplateData = require('../template/templatedata'),
+    template = require('../../views/template');
 
 module.exports = function (app, express) {
     //Template data for the 400 and 500 pages
-    var templatedata = new TemplateData();
+    var templatedata = new TemplateData(),
+        error = Object.create(routing_error);
 
     /*  =====================================
      ERROR HANDLING
@@ -51,13 +53,12 @@ module.exports = function (app, express) {
         //Set the 404 Status
         res.status(404);
         //Setup the Data for the Mustache Template
-        //TODO Uncomment when templatedata fixed
-//        var data = templatedata.data.error,
-//            html;
-//        data.global = templatedata.data.global;
-//        html = Mustache.render(template.global.error.s404.page, data);
-//        res.send(html);
-//        res.send('404: Page not Found', 404);
+        var data = templatedata.data.error,
+            html;
+        data.global = templatedata.data.global;
+        html = Mustache.render(template.global.error.s404.page, data);
+        res.send(html);
+        res.send('404: Page not Found', 404);
     }
 
     function handle500(err, req, res, next) {
@@ -71,13 +72,12 @@ module.exports = function (app, express) {
         //Set the 500 Status
         res.status(500);
         //Setup the Data for the Mustache Template
-        //TODO Uncomment when templatedata fixed
-//        var data = templatedata.data.error,
-//            html;
-//        data.global = templatedata.data.global;
-//        data.err = err;
-//        html = Mustache.render(template.global.error.s500.page, data);
-//        res.send(html);
+        var data = templatedata.data.error,
+            html;
+        data.global = templatedata.data.global;
+        data.err = err;
+        html = Mustache.render(template.global.error.s500.page, data);
+        res.send(html);
     }
 
     /*  =====================================

@@ -149,19 +149,6 @@ ldrly.util.isOnline = function() {
     }
 };
 
-ldrly.util.restart = function() {
-
-    //Restart the promotion application
-    if( scd.profile.application == ice.p.profile.application.marketing.campaign_management.promotion ) {
-        ldrly.promotion.generatePlaylist();
-    }
-
-    if( scd.profile.application == "report" ) {
-        //Restart the report application
-        loadUserApplicationProfile();
-    }
-};
-
 ldrly.util.uuid = {};
 ldrly.util.uuid.v4 = {};
 
@@ -302,50 +289,6 @@ ldrly.util.getUseRoles = function() {
     var userprofile = jaaulde.utils.cookies.get('userprofile');
     userprofile = JSON.parse(userprofile.slice(2));
     return userprofile.role;
-};
-
-ldrly.util.role = {};
-ldrly.util.role.isAdmin = function() {
-    //Retrieve the User Account details from the session
-    var userprofile = jaaulde.utils.cookies.get('userprofile');
-    userprofile = JSON.parse(userprofile.slice(2));
-
-    if(_.indexOf(userprofile.role, 'Admin') > -1) {
-        return true
-    } else {
-        return false;
-    }
-};
-
-ldrly.util.role.isTalentManager = function() {
-    //Retrieve the User Account details from the session
-    var userprofile = jaaulde.utils.cookies.get('userprofile');
-    userprofile = JSON.parse(userprofile.slice(2));
-
-    if(_.indexOf(userprofile.role, 'Talent-Manager') > -1) {
-        return true
-    } else {
-        return false;
-    }
-};
-
-ldrly.util.placeMultimediaVideo = function (data) {
-    var src = null,
-        wHeight = 0,
-        scaledHeight = 0;
-
-    //Set the current SRC - Embeded video address
-    src = decodeURIComponent(data);
-
-    //Compute the height of the current Window
-    wHeight = $(window).height(); //window.innerHeight
-    //Compute the scaled height - 80%
-    scaledHeight = wHeight * 0.8;
-
-    //Create the HTML code for the iframe taking into account the height and width
-    src = '<iframe src="' + src + '" width="100%" height="' + scaledHeight + 'px" frameborder="0" allowfullscreen></iframe>';
-
-    return src;
 };
 
 /**

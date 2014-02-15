@@ -1,4 +1,4 @@
-/*! LDRLY-Leaderboard - v0.0.1 - 2014-02-04
+/*! LDRLY-Leaderboard - v0.0.1 - 2014-02-15
 * Copyright (c) 2014 ; Licensed  */
 /*jslint node: true */
 /*jslint browser: true */
@@ -195,7 +195,7 @@ ui.template.global.modal.error.xhr =
 "use strict";
 
 /*  =============================================
- Error Pages for ICE-M
+ Error Pages for LDRLY
  ============================================= */
 ui.template.global.error = {};
 ui.template.global.error.s404 = {};

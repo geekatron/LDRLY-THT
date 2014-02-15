@@ -14,7 +14,7 @@
 "use strict";
 
 /*  =============================================
- Error Pages for ICE-M
+ Error Pages for LDRLY
  ============================================= */
 ui.template.global.error = {};
 ui.template.global.error.s404 = {};

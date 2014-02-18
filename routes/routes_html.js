@@ -82,6 +82,17 @@ module.exports = function (app) {
         res.send(html);
     });
 
+    /**
+     * Load balance testing route(s)
+     */
+    app.get('/loaderio-6639d00e40a3a7089ef22b239dfa8d0b/', function (req, res, next) {
+        res.sendfile('public/assets/token/loaderio-6639d00e40a3a7089ef22b239dfa8d0b.txt');
+    });
+
+    app.get('/loaderio-6639d00e40a3a7089ef22b239dfa8d0b.txt', function (req, res, next) {
+        res.sendfile('public/assets/token/loaderio-6639d00e40a3a7089ef22b239dfa8d0b.txt');
+    });
+
     /************************************************
      *  Route definitions:                          *
      *      /index.html                             *
